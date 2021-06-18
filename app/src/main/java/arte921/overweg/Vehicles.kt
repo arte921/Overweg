@@ -1,23 +1,23 @@
 package arte921.overweg
 
-data class trein (
+data class Trein (
     val treinNummer: Int,
     val ritId: Int,
     val lat: Float,
     val lng: Float,
-    val snelheid: Int,
+    val snelheid: Float,
     val richting: Float,
     val horizontaleNauwkeurigheid: Float,
     val type: String,
     val bron: String
 )
 
-data class treinen (
-    val treinen: ArrayList<trein>
+data class Treinen (
+    val treinen: ArrayList<Trein>
 )
 
 data class Vehicles (
     val links: Leeg,
-    val payload: treinen,
+    val payload: Treinen,
     val meta: Leeg
 )

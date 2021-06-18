@@ -13,6 +13,7 @@ import com.google.android.gms.location.*
 import com.google.gson.Gson
 import org.apache.commons.io.IOUtils
 import java.io.InputStream
+import java.lang.Math.round
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,12 +52,10 @@ class MainActivity : AppCompatActivity() {
                     val nsRequestUrl = "https://gateway.apiportal.ns.nl/virtual-train-api/api/vehicle?lat=${location.latitude}&lng=${location.longitude}&radius=10000000&limit=1";
 
                     queue.add(GsonRequest(nsRequestUrl, Vehicles::class.java, headers, {
-                        textView.text = it.payload.treinen[0].treinNummer.toString()
+                        textView.text = "De dichstsbijzijnde trein is ${treinAfstand(location, it.payload.treinen[0])} meter van u verwijderd en heeft een snelheid van ${round(it.payload.treinen[0].snelheid)} km/h."
                     }, {
                         textView.text = it.toString()
                     }))
-
-                    textView.text = location.longitude.toString()
                 }
             }
         }
